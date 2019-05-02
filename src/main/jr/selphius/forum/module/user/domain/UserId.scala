@@ -1,4 +1,4 @@
-package jr.selphius.forum.module.user
+package jr.selphius.forum.module.user.domain
 
 import java.util.UUID
 

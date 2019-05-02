@@ -25,11 +25,15 @@ object Routes {
   )*/
 
   val all: Route = get {
-    path("status") {
-      complete(HttpEntity(ContentTypes.`application/json`, """{"status":"ok"}"""))
+    path("communities") {
+      complete(
+        HttpEntity(ContentTypes.`application/json`,
+                   """[ { "id": 1 , "title": "The powerful" } , { "id" = 2 , "title": "The weakest"} ]"""))
     } ~
-      path("ping") {
-        complete(HttpEntity(ContentTypes.`application/json`, """{"data":"pong"}"""))
+      path("users") {
+        complete(
+          HttpEntity(ContentTypes.`application/json`,
+                     """[ { "id": 1 , "title": "The powerful" } , { "id" = 2 , "title": "The weakest"} ]"""))
       }
   }
 }

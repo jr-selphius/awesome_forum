@@ -7,7 +7,7 @@ object Configuration {
     scalaVersion := "2.12.4",
 
     // Custom folders path (/src/main/scala and /src/test/scala by default)
-    mainClass in Compile := Some("jr.selphius.forum.ScalaHttpApi"),
+    mainClass in Compile := Some("jr.selphius.forum.entry_point.ScalaHttpApi"),
     scalaSource in Compile := baseDirectory.value / "/src/main",
     scalaSource in Test := baseDirectory.value / "/src/test",
     resourceDirectory in Compile := baseDirectory.value / "conf",

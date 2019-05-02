@@ -1,4 +1,4 @@
-package jr.selphius.forum
+package jr.selphius.forum.entry_point
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http

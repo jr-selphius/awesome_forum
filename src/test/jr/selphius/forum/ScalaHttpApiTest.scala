@@ -2,6 +2,7 @@ package jr.selphius.forum
 
 import akka.http.scaladsl.model._
 import akka.http.scaladsl.testkit.ScalatestRouteTest
+import jr.selphius.forum.entry_point.Routes
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.{Matchers, WordSpec}
 

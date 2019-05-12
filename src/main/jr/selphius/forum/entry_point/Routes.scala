@@ -36,14 +36,14 @@ object Routes {
     path("status") {
       complete(HttpEntity(ContentTypes.`application/json`, """{"status":"ok"}"""))
     } ~
-    path("ping") {
-      complete(HttpEntity(ContentTypes.`application/json`, """{"data":"pong"}"""))
-    } ~
-    path("communities") {
-      complete(systemCommunities)
-    } ~
-    path("users") {
-      complete(systemUsers)
-    }
+      path("ping") {
+        complete(HttpEntity(ContentTypes.`application/json`, """{"data":"pong"}"""))
+      } ~
+      path("communities") {
+        complete(systemCommunities)
+      } ~
+      path("users") {
+        complete(systemUsers)
+      }
   }
 }

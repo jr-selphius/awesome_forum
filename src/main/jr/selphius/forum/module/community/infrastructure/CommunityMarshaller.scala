@@ -27,7 +27,7 @@ object CommunityMarshaller extends SprayJsonSupport with DefaultJsonProtocol {
   }
 
   implicit object CommunityIdMarshaller extends JsonFormat[CommunityId] {
-    override def write(value: CommunityId): JsValue = JsString(value.toString)
+    override def write(value: CommunityId): JsValue = JsString(value.value.toString)
 
     override def read(value: JsValue): CommunityId = value match {
       case JsString(id) => CommunityId(id)

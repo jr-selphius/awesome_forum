@@ -1,12 +1,11 @@
 package jr.selphius.forum.entry_point
 
-import akka.http.scaladsl.model.{ContentTypes, HttpEntity}
 import akka.http.scaladsl.server.Directives.{complete, get, path, _}
 import akka.http.scaladsl.server.Route
 import jr.selphius.forum.module.community.domain.Community
 import jr.selphius.forum.module.community.infrastructure.CommunityMarshaller._
-import jr.selphius.forum.module.user.infrastructure.UserMarshaller._
 import jr.selphius.forum.module.user.domain.User
+import jr.selphius.forum.module.user.infrastructure.UserMarshaller._
 
 object Routes {
 

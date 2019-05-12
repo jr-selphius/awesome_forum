@@ -4,13 +4,21 @@ import akka.http.scaladsl.model.{ContentTypes, HttpEntity}
 import akka.http.scaladsl.server.Directives.{complete, get, path, _}
 import akka.http.scaladsl.server.Route
 import jr.selphius.forum.module.community.domain.Community
+import jr.selphius.forum.module.community.infrastructure.CommunityMarshaller._
+import jr.selphius.forum.module.user.infrastructure.UserMarshaller._
 import jr.selphius.forum.module.user.domain.User
 
 object Routes {
 
   private val systemUsers = Seq(
-    User(id = "deacd129-d419-4552-9bfc-0723c3c4f56a", name = "Edufasio"),
-    User(id = "b62f767f-7160-4405-a4af-39ebb3635c17", name = "Edonisio")
+    User(
+      id = "deacd129-d419-4552-9bfc-0723c3c4f56a",
+      name = "Edufasio"
+    ),
+    User(
+      id = "b62f767f-7160-4405-a4af-39ebb3635c17",
+      name = "Edonisio"
+    )
   )
 
   private val systemCommunities = Seq(
@@ -25,15 +33,17 @@ object Routes {
   )
 
   val all: Route = get {
-    path("communities") {
-      complete(
-        HttpEntity(ContentTypes.`application/json`,
-                   """[ { "id": 1 , "title": "The powerful" } , { "id" = 2 , "title": "The weakest"} ]"""))
+    path("status") {
+      complete(HttpEntity(ContentTypes.`application/json`, """{"status":"ok"}"""))
     } ~
-      path("users") {
-        complete(
-          HttpEntity(ContentTypes.`application/json`,
-                     """[ { "id": 1 , "title": "The powerful" } , { "id" = 2 , "title": "The weakest"} ]"""))
-      }
+    path("ping") {
+      complete(HttpEntity(ContentTypes.`application/json`, """{"data":"pong"}"""))
+    } ~
+    path("communities") {
+      complete(systemCommunities)
+    } ~
+    path("users") {
+      complete(systemUsers)
+    }
   }
 }

@@ -12,7 +12,8 @@ object Dependencies {
     "com.lihaoyi"            %% "pprint"      % "0.5.3",
     "com.typesafe.akka"      %% "akka-http"   % Versions.akkaHttp,
     "com.typesafe.akka"      %% "akka-actor"  % Versions.akka,
-    "com.typesafe.akka"      %% "akka-stream" % Versions.akka // Explicit dependency due to: https://bit.ly/akka-http-25
+    "com.typesafe.akka"      %% "akka-stream" % Versions.akka, // Explicit dependency due to: https://bit.ly/akka-http-25
+    "com.typesafe.akka"      %% "akka-http-spray-json" % Versions.akkaHttp
   )
 
   val test = Seq(

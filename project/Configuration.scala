@@ -11,7 +11,6 @@ object Configuration {
     scalaSource in Compile := baseDirectory.value / "/src/main",
     scalaSource in Test := baseDirectory.value / "/src/test",
     resourceDirectory in Compile := baseDirectory.value / "conf",
-
     // Compiler options
     scalacOptions ++= Seq(
       "-deprecation", // Warnings deprecation
@@ -25,7 +24,6 @@ object Configuration {
     ),
     scalacOptions in run in Compile -= "-Xcheckinit", // Remove it in production because it's expensive
     javaOptions += "-Duser.timezone=UTC",
-
     // Test options
     parallelExecution in Test := false,
     testForkedParallel in Test := false,

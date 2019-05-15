@@ -22,6 +22,16 @@ final class Routes(container: EntryPointDependencyContainer) {
             bodyParams("name").convertTo[String]
           )
         }
-      }
+      } ~
+        path("users") {
+          entity(as[JsValue]) { json =>
+            val bodyParams = json.asJsObject.fields
+
+            container.userPostController.post(
+              bodyParams("id").convertTo[String],
+              bodyParams("name").convertTo[String]
+            )
+          }
+        }
     }
 }

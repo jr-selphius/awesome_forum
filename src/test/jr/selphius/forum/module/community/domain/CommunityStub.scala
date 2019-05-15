@@ -3,8 +3,8 @@ package jr.selphius.forum.module.community.domain
 object CommunityStub {
   def apply(
       id: String = CommunityIdStub.random.value.toString,
-      name: String = CommunityNameStub.random.value
-  ): Community = Community(id, name)
+      title: String = CommunityTitleStub.random.value
+  ): Community = Community(id, title)
 
   def random: Community = apply()
 }

@@ -5,9 +5,9 @@ import jr.selphius.forum.module.community.infrastructure.repository.InMemoryComm
 
 final class CommunityModuleDependencyContainer {
 
-  val inMemoryCommunityRepository = new InMemoryCommunityRepository
+  val repository = new InMemoryCommunityRepository
 
-  val communitiesSearcher: CommunitiesSearcher = new CommunitiesSearcher(inMemoryCommunityRepository)
+  val communitiesSearcher: CommunitiesSearcher = new CommunitiesSearcher(repository)
 
-  val communitiesCreator: CommunityCreator = new CommunityCreator(inMemoryCommunityRepository)
+  val communitiesCreator: CommunityCreator = new CommunityCreator(repository)
 }

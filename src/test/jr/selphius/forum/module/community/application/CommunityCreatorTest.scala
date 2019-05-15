@@ -10,7 +10,7 @@ final class CommunityCreatorTest extends CommunityUnitTestCase {
     "save a community" in {
       val community = CommunityStub.random
 
-      shouldSaveVideo(community)
+      repositoryShouldSaveVideo(community)
 
       communityCreator.create(community.id, community.title) should be
     }

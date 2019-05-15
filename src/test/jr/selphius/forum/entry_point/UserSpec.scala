@@ -22,8 +22,7 @@ final class UserSpec extends AcceptanceSpec {
   "return all the system users" in {
     get("/users") {
       val expectedUsers = Seq(
-        UserStub(id = "deacd129-d419-4552-9bfc-0723c3c4f56a", name = "Edufasio"),
-        UserStub(id = "b62f767f-7160-4405-a4af-39ebb3635c17", name = "Edonisio")
+        UserStub(id = "a11098af-d352-4cce-8372-2b48b97e7042", name = "The new user")
       )
 
       status shouldBe StatusCodes.OK

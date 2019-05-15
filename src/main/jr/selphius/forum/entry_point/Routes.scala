@@ -14,24 +14,23 @@ final class Routes(container: EntryPointDependencyContainer) {
   } ~
     post {
       path("communities") {
-        entity(as[JsValue]) { json =>
-          val bodyParams = json.asJsObject.fields
-
+        jsonBody { body =>
           container.communityPostController.post(
-            bodyParams("id").convertTo[String],
-            bodyParams("name").convertTo[String]
+            body("id").convertTo[String],
+            body("name").convertTo[String]
           )
         }
       } ~
         path("users") {
-          entity(as[JsValue]) { json =>
-            val bodyParams = json.asJsObject.fields
-
+          jsonBody { body =>
             container.userPostController.post(
-              bodyParams("id").convertTo[String],
-              bodyParams("name").convertTo[String]
+              body("id").convertTo[String],
+              body("name").convertTo[String]
             )
           }
         }
     }
+
+  private def jsonBody[T](handler: Map[String, JsValue] => Route): Route =
+    entity(as[JsValue])(json => handler(json.asJsObject.fields))
 }

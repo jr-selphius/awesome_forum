@@ -8,9 +8,8 @@ import spray.json.JsValue
 
 final class Routes(container: EntryPointDependencyContainer) {
 
-  val all: Route = get {
-    path("communities")(container.communityGetController.get()) ~
-      path("users")(container.userGetController.get())
+  private val community = get {
+    path("communities")(container.communityGetController.get())
   } ~
     post {
       path("communities") {
@@ -20,16 +19,22 @@ final class Routes(container: EntryPointDependencyContainer) {
             body("name").convertTo[String]
           )
         }
-      } ~
-        path("users") {
-          jsonBody { body =>
-            container.userPostController.post(
-              body("id").convertTo[String],
-              body("name").convertTo[String]
-            )
-          }
-        }
+      }
     }
+
+  private val user = get {
+    path("users")(container.userGetController.get())
+  } ~
+    post {
+      jsonBody { body =>
+        container.userPostController.post(
+          body("id").convertTo[String],
+          body("name").convertTo[String]
+        )
+      }
+    }
+
+  val all: Route = user ~ community
 
   private def jsonBody[T](handler: Map[String, JsValue] => Route): Route =
     entity(as[JsValue])(json => handler(json.asJsObject.fields))

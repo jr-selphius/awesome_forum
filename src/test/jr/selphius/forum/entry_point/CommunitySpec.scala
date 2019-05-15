@@ -12,7 +12,7 @@ final class CommunitySpec extends AcceptanceSpec {
     """
       |{
       |  "id": "a11098af-d352-4cce-8372-2b48b97e6942",
-      |  "name": "The new community"
+      |  "title": "The new community"
       |}
     """.stripMargin
   ) {
@@ -21,10 +21,8 @@ final class CommunitySpec extends AcceptanceSpec {
 
   "return all the system communities" in {
     get("/communities") {
-      val expectedCommunities = Seq(
-        CommunityStub(id = "3dfb19ee-260b-420a-b08c-ed58a7a07aee", name = "🎥 Scala FTW vol. 1"),
-        CommunityStub(id = "7341b1fc-3d80-4f6a-bcde-4fef86b01f97", name = "🔝 Interview with Odersky")
-      )
+      val expectedCommunities =
+        Seq(CommunityStub(id = "a11098af-d352-4cce-8372-2b48b97e6942", title = "The new community"))
 
       status shouldBe StatusCodes.OK
       contentType shouldBe ContentTypes.`application/json`

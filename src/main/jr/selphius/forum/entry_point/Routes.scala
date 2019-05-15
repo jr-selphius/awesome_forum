@@ -16,7 +16,7 @@ final class Routes(container: EntryPointDependencyContainer) {
         jsonBody { body =>
           container.communityPostController.post(
             body("id").convertTo[String],
-            body("name").convertTo[String]
+            body("title").convertTo[String]
           )
         }
       }
@@ -26,11 +26,13 @@ final class Routes(container: EntryPointDependencyContainer) {
     path("users")(container.userGetController.get())
   } ~
     post {
-      jsonBody { body =>
-        container.userPostController.post(
-          body("id").convertTo[String],
-          body("name").convertTo[String]
-        )
+      path("users") {
+        jsonBody { body =>
+          container.userPostController.post(
+            body("id").convertTo[String],
+            body("name").convertTo[String]
+          )
+        }
       }
     }
 

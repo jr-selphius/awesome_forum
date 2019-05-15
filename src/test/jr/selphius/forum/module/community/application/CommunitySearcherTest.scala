@@ -10,7 +10,7 @@ final class CommunitySearcherTest extends CommunityUnitTestCase {
     "search all existing communities" in {
       val existingCommunities = Seq(CommunityStub.random, CommunityStub.random)
 
-      shouldSearchAllCommunities(existingCommunities)
+      repositoryShouldSearchAllCommunities(existingCommunities)
 
       communitySearcher.searchAll() shouldBe existingCommunities
     }

@@ -10,7 +10,7 @@ final class UserSearcherTest extends UserUnitTestCase {
     "search all existing users" in {
       val existingUsers = Seq(UserStub.random, UserStub.random)
 
-      shouldSearchAllUsers(existingUsers)
+      repositoryShouldSearchAllUsers(existingUsers)
 
       userSearcher.searchAll() shouldBe existingUsers
     }

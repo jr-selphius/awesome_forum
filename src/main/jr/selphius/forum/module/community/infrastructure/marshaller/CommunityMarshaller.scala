@@ -3,17 +3,17 @@ package jr.selphius.forum.module.community.infrastructure.marshaller
 import java.util.UUID
 
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
-import jr.selphius.forum.module.community.domain.{Community, CommunityId, CommunityName}
+import jr.selphius.forum.module.community.domain.{Community, CommunityId, CommunityTitle}
 import spray.json.{DefaultJsonProtocol, DeserializationException, JsString, JsValue, JsonFormat, RootJsonFormat}
 
 object CommunityMarshaller extends SprayJsonSupport with DefaultJsonProtocol {
 
-  implicit object CommunityNameMarshaller extends JsonFormat[CommunityName] {
-    override def write(value: CommunityName): JsValue = JsString(value.value)
+  implicit object CommunityTitleMarshaller extends JsonFormat[CommunityTitle] {
+    override def write(value: CommunityTitle): JsValue = JsString(value.value)
 
-    override def read(value: JsValue): CommunityName = value match {
-      case JsString(name) => CommunityName(name)
-      case _              => throw DeserializationException("Expected 1 string for Username")
+    override def read(value: JsValue): CommunityTitle = value match {
+      case JsString(title) => CommunityTitle(title)
+      case _               => throw DeserializationException("Expected 1 string for Usertitle")
     }
   }
 
@@ -36,6 +36,6 @@ object CommunityMarshaller extends SprayJsonSupport with DefaultJsonProtocol {
   }
 
   implicit val communityFormat: RootJsonFormat[Community] = jsonFormat2(
-    Community.apply(_: CommunityId, _: CommunityName))
+    Community.apply(_: CommunityId, _: CommunityTitle))
 
 }

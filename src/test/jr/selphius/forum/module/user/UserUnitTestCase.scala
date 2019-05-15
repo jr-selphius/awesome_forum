@@ -10,4 +10,9 @@ protected[user] trait UserUnitTestCase extends UnitTestCase {
     (repository.getAll _)
       .expects()
       .returning(users)
+
+  protected def shouldSaveVideo(user: User): Unit =
+    (repository.save _)
+      .expects(user)
+      .returning(())
 }

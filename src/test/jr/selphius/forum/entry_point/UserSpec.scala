@@ -7,6 +7,18 @@ import spray.json._
 
 final class UserSpec extends AcceptanceSpec {
 
+  "save a user" in post(
+    "/users",
+    """
+      |{
+      |  "id": "a11098af-d352-4cce-8372-2b48b97e7042",
+      |  "name": "The new user"
+      |}
+    """.stripMargin
+  ) {
+    status shouldBe StatusCodes.NoContent
+  }
+
   "return all the system users" in {
     get("/users") {
       val expectedUsers = Seq(

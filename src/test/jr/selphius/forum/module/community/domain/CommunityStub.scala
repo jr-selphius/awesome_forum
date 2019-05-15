@@ -1,6 +1,4 @@
-package jr.selphius.forum.module.community.infrastructure.stub
-
-import jr.selphius.forum.module.community.domain.Community
+package jr.selphius.forum.module.community.domain
 
 object CommunityStub {
   def apply(

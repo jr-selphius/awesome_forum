@@ -1,4 +1,4 @@
-package jr.selphius.forum.module.community.infrastructure
+package jr.selphius.forum.module.community.infrastructure.marshaller
 
 import java.util.UUID
 

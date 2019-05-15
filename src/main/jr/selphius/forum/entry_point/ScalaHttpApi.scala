@@ -4,6 +4,8 @@ import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.stream.ActorMaterializer
 import com.typesafe.config.ConfigFactory
+import jr.selphius.forum.module.community.infrastructure.dependency_injection.CommunityModuleDependencyContainer
+import jr.selphius.forum.module.user.infrastructure.dependency_injection.UserModuleDependencyContainer
 
 import scala.concurrent.ExecutionContextExecutor
 import scala.io.StdIn
@@ -24,7 +26,12 @@ object ScalaHttpApi {
     implicit val materializer: ActorMaterializer            = ActorMaterializer()
     implicit val executionContext: ExecutionContextExecutor = system.dispatcher
 
-    val bindingFuture = Http().bindAndHandle(Routes.all, host, port)
+    val container =
+      new EntryPointDependencyContainer(new UserModuleDependencyContainer, new CommunityModuleDependencyContainer)
+
+    val routes = new Routes(container)
+
+    val bindingFuture = Http().bindAndHandle(routes.all, host, port)
 
     bindingFuture.failed.foreach { t =>
       println(s"Failed to bind to http://$host:$port/:")

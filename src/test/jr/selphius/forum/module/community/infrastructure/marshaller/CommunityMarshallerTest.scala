@@ -3,7 +3,7 @@ package jr.selphius.forum.module.community.infrastructure.marshaller
 import jr.selphius.forum.module.community.domain.Community
 import spray.json.{JsArray, JsObject, JsString}
 
-object CommunityMarshaller {
+object CommunityMarshallerTest {
   def marshall(communities: Seq[Community]): JsArray = JsArray(
     communities
       .map(

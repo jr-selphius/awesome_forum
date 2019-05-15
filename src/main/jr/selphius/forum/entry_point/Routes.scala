@@ -1,42 +1,12 @@
 package jr.selphius.forum.entry_point
 
-import akka.http.scaladsl.server.Directives.{complete, get, path, _}
+import akka.http.scaladsl.server.Directives.{get, path, _}
 import akka.http.scaladsl.server.Route
-import jr.selphius.forum.module.community.domain.Community
-import jr.selphius.forum.module.community.infrastructure.CommunityMarshaller._
-import jr.selphius.forum.module.user.domain.User
-import jr.selphius.forum.module.user.infrastructure.UserMarshaller._
 
-object Routes {
-
-  private val systemUsers = Seq(
-    User(
-      id = "deacd129-d419-4552-9bfc-0723c3c4f56a",
-      name = "Edufasio"
-    ),
-    User(
-      id = "b62f767f-7160-4405-a4af-39ebb3635c17",
-      name = "Edonisio"
-    )
-  )
-
-  private val systemCommunities = Seq(
-    Community(
-      id = "3dfb19ee-260b-420a-b08c-ed58a7a07aee",
-      title = "🎥 Scala FTW vol. 1"
-    ),
-    Community(
-      id = "7341b1fc-3d80-4f6a-bcde-4fef86b01f97",
-      title = "🔝 Interview with Odersky"
-    )
-  )
+final class Routes(container: EntryPointDependencyContainer) {
 
   val all: Route = get {
-    path("communities") {
-      complete(systemCommunities)
-    } ~
-      path("users") {
-        complete(systemUsers)
-      }
+    path("communities")(container.communityGetController.get()) ~
+      path("users")(container.userGetController.get())
   }
 }

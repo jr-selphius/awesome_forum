@@ -1,8 +1,8 @@
 package jr.selphius.forum.entry_point
 
 import akka.http.scaladsl.model.{ContentTypes, StatusCodes}
+import jr.selphius.forum.module.user.domain.UserStub
 import jr.selphius.forum.module.user.infrastructure.marshaller.UserMarshallerTest
-import jr.selphius.forum.module.user.infrastructure.stub.UserStub
 import spray.json._
 
 final class UserSpec extends AcceptanceSpec {

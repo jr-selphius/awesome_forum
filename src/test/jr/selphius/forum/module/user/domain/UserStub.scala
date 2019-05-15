@@ -1,6 +1,4 @@
-package jr.selphius.forum.module.user.infrastructure.stub
-
-import jr.selphius.forum.module.user.domain.User
+package jr.selphius.forum.module.user.domain
 
 object UserStub {
   def apply(

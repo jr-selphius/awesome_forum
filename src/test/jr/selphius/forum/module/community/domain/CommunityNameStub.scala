@@ -1,6 +1,5 @@
-package jr.selphius.forum.module.community.infrastructure.stub
+package jr.selphius.forum.module.community.domain
 
-import jr.selphius.forum.module.community.domain.CommunityName
 import jr.selphius.forum.module.shared.stub.{IntStub, StringStub}
 
 object CommunityNameStub {

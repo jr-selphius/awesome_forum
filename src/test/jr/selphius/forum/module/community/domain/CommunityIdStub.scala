@@ -1,8 +1,7 @@
-package jr.selphius.forum.module.community.infrastructure.stub
+package jr.selphius.forum.module.community.domain
 
 import java.util.UUID
 
-import jr.selphius.forum.module.community.domain.CommunityId
 import jr.selphius.forum.module.shared.stub.UuidStub
 
 object CommunityIdStub {

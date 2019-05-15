@@ -1,7 +1,6 @@
-package jr.selphius.forum.module.user.infrastructure.stub
+package jr.selphius.forum.module.user.domain
 
 import jr.selphius.forum.module.shared.stub.{IntStub, StringStub}
-import jr.selphius.forum.module.user.domain.Username
 
 object UsernameStub {
   private val minChars = 1

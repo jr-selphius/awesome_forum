@@ -1,9 +1,8 @@
-package jr.selphius.forum.module.user.infrastructure.stub
+package jr.selphius.forum.module.user.domain
 
 import java.util.UUID
 
 import jr.selphius.forum.module.shared.stub.UuidStub
-import jr.selphius.forum.module.user.domain.UserId
 
 object UserIdStub {
   def apply(value: String): UserId = UserIdStub(UuidStub(value))

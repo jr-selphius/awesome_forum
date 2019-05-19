@@ -2,6 +2,7 @@ package jr.selphius.forum.module.user.infrastructure.repository
 
 import jr.selphius.forum.module.user.UserIntegrationTestCase
 import jr.selphius.forum.module.user.domain.UserStub
+import org.scalatest.concurrent.ScalaFutures._
 
 final class InMemoryUserRepositoryTest extends UserIntegrationTestCase {
 
@@ -14,7 +15,9 @@ final class InMemoryUserRepositoryTest extends UserIntegrationTestCase {
       repository.save(user)
       repository.save(anotherUser)
 
-      repository.getAll() shouldBe existingUsers
+      whenReady(repository.getAll()) {
+        _ shouldBe existingUsers
+      }
     }
   }
 }

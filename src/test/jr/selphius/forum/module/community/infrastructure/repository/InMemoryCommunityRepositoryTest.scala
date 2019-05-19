@@ -2,6 +2,7 @@ package jr.selphius.forum.module.community.infrastructure.repository
 
 import jr.selphius.forum.module.community.CommunityIntegrationTestCase
 import jr.selphius.forum.module.community.domain.CommunityStub
+import org.scalatest.concurrent.ScalaFutures._
 
 final class InMemoryCommunityRepositoryTest extends CommunityIntegrationTestCase {
 
@@ -14,7 +15,9 @@ final class InMemoryCommunityRepositoryTest extends CommunityIntegrationTestCase
       repository.save(community)
       repository.save(anotherCommunity)
 
-      repository.getAll() shouldBe communities
+      whenReady(repository.getAll()) {
+        _ shouldBe communities
+      }
     }
   }
 

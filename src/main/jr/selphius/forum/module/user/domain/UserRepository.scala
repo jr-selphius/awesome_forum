@@ -4,5 +4,5 @@ import scala.concurrent.Future
 
 trait UserRepository {
   def getAll(): Future[Seq[User]]
-  def save(user: User): Unit
+  def save(user: User): Future[Unit]
 }

@@ -5,7 +5,10 @@ import jr.selphius.forum.module.community.domain.CommunityRepository
 import jr.selphius.forum.module.community.infrastructure.repository.DoobieMysqlCommunityRepository
 import jr.selphius.forum.module.shared.infraestructure.persistence.doobie.DoobieDbConnection
 
-final class CommunityModuleDependencyContainer(doobieDbConnection: DoobieDbConnection) {
+import scala.concurrent.ExecutionContext
+
+final class CommunityModuleDependencyContainer(doobieDbConnection: DoobieDbConnection)(
+    implicit executionContext: ExecutionContext) {
   val repository: CommunityRepository          = new DoobieMysqlCommunityRepository(doobieDbConnection)
   val communitiesSearcher: CommunitiesSearcher = new CommunitiesSearcher(repository)
   val communitiesCreator: CommunityCreator     = new CommunityCreator(repository)

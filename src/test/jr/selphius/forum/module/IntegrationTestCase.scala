@@ -7,9 +7,10 @@ import jr.selphius.forum.module.shared.infraestructure.persistence.doobie.Doobie
 
 protected[forum] class IntegrationTestCase extends UnitTestCase {
 
-  val appConfig          = ConfigFactory.load("application")
-  val dbConfig           = DbConfig(appConfig.getConfig("database"))
-  val sharedDependencies = new SharedModuleDependencyContainer(dbConfig)
+  private val appConfig            = ConfigFactory.load("application")
+  private val dbConfig             = DbConfig(appConfig.getConfig("database"))
+  private val actorSystemName      = "awesome-forum-integration-test"
+  protected val sharedDependencies = new SharedModuleDependencyContainer(actorSystemName, dbConfig)
 
   protected val doobieDbConnection: DoobieDbConnection = sharedDependencies.doobieDbConnection
 }

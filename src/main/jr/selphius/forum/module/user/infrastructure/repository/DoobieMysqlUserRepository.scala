@@ -5,11 +5,17 @@ import jr.selphius.forum.module.shared.infraestructure.persistence.doobie.Doobie
 import jr.selphius.forum.module.user.domain.{User, UserRepository}
 import jr.selphius.forum.module.shared.infraestructure.persistence.doobie.TypesConversions._
 
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, Future}
 
-final class DoobieMysqlUserRepository(db: DoobieDbConnection) extends UserRepository {
+final class DoobieMysqlUserRepository(db: DoobieDbConnection)(implicit executionContext: ExecutionContext)
+    extends UserRepository {
 
   override def getAll(): Future[Seq[User]] = db.read(sql"SELECT user_id, name FROM users".query[User].to[Seq])
 
-  override def save(user: User): Unit = {}
+  override def save(user: User): Future[Unit] = {
+    sql"INSERT INTO users(user_id, name) VALUES (${user.id}, ${user.name})".update.run
+      .transact(db.transactor)
+      .unsafeToFuture()
+      .map(_ => ())
+  }
 }

@@ -4,5 +4,5 @@ import scala.concurrent.Future
 
 trait CommunityRepository {
   def getAll(): Future[Seq[Community]]
-  def save(community: Community): Unit
+  def save(community: Community): Future[Unit]
 }

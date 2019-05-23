@@ -5,6 +5,7 @@ import jr.selphius.forum.module.community.domain.CommunityRepository
 import jr.selphius.forum.module.community.infrastructure.dependency_injection.CommunityModuleDependencyContainer
 
 protected[community] trait CommunityIntegrationTestCase extends IntegrationTestCase {
-  private val container                         = new CommunityModuleDependencyContainer(doobieDbConnection)
+  private val container =
+    new CommunityModuleDependencyContainer(doobieDbConnection)(sharedDependencies.executionContext)
   protected val repository: CommunityRepository = container.repository
 }

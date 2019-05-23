@@ -16,5 +16,5 @@ protected[community] trait CommunityUnitTestCase extends UnitTestCase {
   protected def repositoryShouldSaveVideo(community: Community): Unit =
     (repository.save _)
       .expects(community)
-      .returning(())
+      .returning(Future.unit)
 }

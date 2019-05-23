@@ -5,9 +5,11 @@ import akka.http.scaladsl.Http
 import akka.stream.ActorMaterializer
 import com.typesafe.config.ConfigFactory
 import jr.selphius.forum.module.community.infrastructure.dependency_injection.CommunityModuleDependencyContainer
+import jr.selphius.forum.module.shared.infraestructure.config
+import jr.selphius.forum.module.shared.infraestructure.dependency_injection.SharedModuleDependencyContainer
 import jr.selphius.forum.module.user.infrastructure.dependency_injection.UserModuleDependencyContainer
 
-import scala.concurrent.ExecutionContextExecutor
+import scala.concurrent.ExecutionContext
 import scala.io.StdIn
 
 object ScalaHttpApi {
@@ -22,12 +24,17 @@ object ScalaHttpApi {
     val host            = serverConfig.getString("http-server.host")
     val port            = serverConfig.getInt("http-server.port")
 
-    implicit val system: ActorSystem                        = ActorSystem(actorSystemName)
-    implicit val materializer: ActorMaterializer            = ActorMaterializer()
-    implicit val executionContext: ExecutionContextExecutor = system.dispatcher
+    val dbConfig = config.DbConfig(appConfig.getConfig("database"))
 
-    val container =
-      new EntryPointDependencyContainer(new UserModuleDependencyContainer, new CommunityModuleDependencyContainer)
+    val sharedDependencies = new SharedModuleDependencyContainer(actorSystemName, dbConfig)
+
+    implicit val system: ActorSystem                = sharedDependencies.actorSystem
+    implicit val materializer: ActorMaterializer    = sharedDependencies.materializer
+    implicit val executionContext: ExecutionContext = sharedDependencies.executionContext
+
+    val container = new EntryPointDependencyContainer(
+      new UserModuleDependencyContainer(sharedDependencies.doobieDbConnection),
+      new CommunityModuleDependencyContainer(sharedDependencies.doobieDbConnection))
 
     val routes = new Routes(container)
 

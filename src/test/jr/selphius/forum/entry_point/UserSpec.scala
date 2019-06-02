@@ -1,7 +1,7 @@
 package jr.selphius.forum.entry_point
 
 import akka.http.scaladsl.model.{ContentTypes, StatusCodes}
-import jr.selphius.forum.module.user.domain.UserStub
+import jr.selphius.forum.module.user.domain.UserMother
 import jr.selphius.forum.module.user.infrastructure.marshaller.UserMarshallerTest
 import spray.json._
 import doobie.implicits._
@@ -30,7 +30,7 @@ final class UserSpec extends AcceptanceSpec {
 
     cleanUsersTable()
 
-    val users = UserStub.randomSeq
+    val users = UserMother.randomSeq
 
     users.foreach(user => userDependencies.repository.save(user))
 

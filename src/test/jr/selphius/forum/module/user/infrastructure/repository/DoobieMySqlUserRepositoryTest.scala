@@ -5,7 +5,7 @@ import doobie.implicits._
 import org.scalatest.concurrent.ScalaFutures._
 import doobie.util.update.Update
 import jr.selphius.forum.module.user.UserIntegrationTestCase
-import jr.selphius.forum.module.user.domain.{User, UserStub}
+import jr.selphius.forum.module.user.domain.{User, UserMother}
 import jr.selphius.forum.module.shared.infraestructure.persistence.doobie.TypesConversions._
 
 final class DoobieMySqlUserRepositoryTest extends UserIntegrationTestCase {
@@ -33,7 +33,7 @@ final class DoobieMySqlUserRepositoryTest extends UserIntegrationTestCase {
     }
 
     "search all users" in {
-      val expectedUsers = UserStub.randomSeq
+      val expectedUsers = UserMother.randomSeq
 
       insert(expectedUsers)
 

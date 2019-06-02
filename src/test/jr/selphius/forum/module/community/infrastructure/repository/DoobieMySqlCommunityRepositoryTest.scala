@@ -5,7 +5,7 @@ import doobie.implicits._
 import doobie.util.update.Update
 import org.scalatest.concurrent.ScalaFutures._
 import jr.selphius.forum.module.community.CommunityIntegrationTestCase
-import jr.selphius.forum.module.community.domain.{Community, CommunityStub}
+import jr.selphius.forum.module.community.domain.{Community, CommunityMother}
 import jr.selphius.forum.module.shared.infraestructure.persistence.doobie.TypesConversions._
 
 final class DoobieMySqlCommunityRepositoryTest extends CommunityIntegrationTestCase {
@@ -33,7 +33,7 @@ final class DoobieMySqlCommunityRepositoryTest extends CommunityIntegrationTestC
     }
 
     "search all communities" in {
-      val expectedCommunities = CommunityStub.randomSeq
+      val expectedCommunities = CommunityMother.randomSeq
 
       insert(expectedCommunities)
 

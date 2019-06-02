@@ -1,7 +1,7 @@
 package jr.selphius.forum.entry_point
 
 import akka.http.scaladsl.model.{ContentTypes, StatusCodes}
-import jr.selphius.forum.module.community.domain.{Community, CommunityStub}
+import jr.selphius.forum.module.community.domain.{Community, CommunityMother}
 import jr.selphius.forum.module.community.infrastructure.marshaller.CommunityMarshallerTest
 import spray.json._
 import doobie.implicits._
@@ -30,7 +30,7 @@ final class CommunitySpec extends AcceptanceSpec {
 
     cleanCommunitiesTable()
 
-    val communities = CommunityStub.randomSeq
+    val communities = CommunityMother.randomSeq
 
     communities.foreach(communityContainer.repository.save)
 

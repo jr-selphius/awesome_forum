@@ -1,7 +1,7 @@
 package jr.selphius.forum.module.user.application
 
 import jr.selphius.forum.module.user.UserUnitTestCase
-import jr.selphius.forum.module.user.domain.UserStub
+import jr.selphius.forum.module.user.domain.UserMother
 import org.scalatest.concurrent.ScalaFutures._
 
 final class UserSearcherTest extends UserUnitTestCase {
@@ -9,7 +9,7 @@ final class UserSearcherTest extends UserUnitTestCase {
 
   "User searcher" should {
     "search all existing users" in {
-      val existingUsers = Seq(UserStub.random, UserStub.random)
+      val existingUsers = Seq(UserMother.random, UserMother.random)
 
       repositoryShouldSearchAllUsers(existingUsers)
 

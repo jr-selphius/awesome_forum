@@ -1,8 +1,8 @@
-package jr.selphius.forum.module.shared.stub
+package jr.selphius.forum.module.shared
 
 import java.util.UUID
 
-object UuidStub {
+object UuidMother {
   def apply(value: String): UUID = UUID.fromString(value)
 
   def random: UUID = UUID.randomUUID()

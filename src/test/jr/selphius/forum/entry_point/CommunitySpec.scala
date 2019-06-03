@@ -47,6 +47,19 @@ final class CommunitySpec extends AcceptanceSpec {
     }
   }
 
+  "delete a community" in {
+
+    cleanCommunitiesTable()
+
+    val community = CommunityMother.random
+
+    communityContainer.repository.save(community)
+
+    delete(s"/communities/${community.id.value}") {
+      status shouldBe StatusCodes.NoContent
+    }
+  }
+
   "return all the system communities" in {
 
     cleanCommunitiesTable()

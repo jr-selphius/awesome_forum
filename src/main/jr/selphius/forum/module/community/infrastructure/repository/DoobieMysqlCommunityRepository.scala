@@ -1,7 +1,7 @@
 package jr.selphius.forum.module.community.infrastructure.repository
 
 import doobie.implicits._
-import jr.selphius.forum.module.community.domain.{Community, CommunityRepository}
+import jr.selphius.forum.module.community.domain.{Community, CommunityId, CommunityRepository}
 import jr.selphius.forum.module.shared.infraestructure.persistence.doobie.DoobieDbConnection
 import jr.selphius.forum.module.shared.infraestructure.persistence.doobie.TypesConversions._
 
@@ -23,6 +23,13 @@ final class DoobieMysqlCommunityRepository(db: DoobieDbConnection)(implicit exec
 
   override def update(community: Community): Future[Unit] = {
     sql"UPDATE communities SET title=${community.title} WHERE community_id=${community.id}".update.run
+      .transact(db.transactor)
+      .unsafeToFuture()
+      .map(_ => ())
+  }
+
+  override def remove(id: CommunityId): Future[Unit] = {
+    sql"DELETE FROM communities WHERE community_id=$id".update.run
       .transact(db.transactor)
       .unsafeToFuture()
       .map(_ => ())

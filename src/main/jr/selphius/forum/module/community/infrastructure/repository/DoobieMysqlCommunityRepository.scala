@@ -22,7 +22,7 @@ final class DoobieMysqlCommunityRepository(db: DoobieDbConnection)(implicit exec
   }
 
   override def update(community: Community): Future[Unit] = {
-    sql"UPDATE communities SET title=${community.title} WHERE user_id=${community.id}".update.run
+    sql"UPDATE communities SET title=${community.title} WHERE community_id=${community.id}".update.run
       .transact(db.transactor)
       .unsafeToFuture()
       .map(_ => ())

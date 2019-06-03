@@ -11,7 +11,7 @@ final class UserRemoverTest extends UserUnitTestCase {
 
       val user = UserMother.random
 
-      repositoryShouldSaveUser(user)
+      repositoryShouldRemoveUser(user.id)
 
       userRemover.remove(user.id) should be
     }

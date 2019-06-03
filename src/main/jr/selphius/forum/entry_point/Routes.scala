@@ -37,7 +37,7 @@ final class Routes(container: EntryPointDependencyContainer) {
   } ~
     delete {
       path("users" / Segment) { id: String =>
-          container.userDeleteController.delete(id)
+        container.userDeleteController.delete(id)
       }
     } ~
     post {

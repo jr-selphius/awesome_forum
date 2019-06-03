@@ -1,7 +1,16 @@
 package jr.selphius.forum.entry_point
 
-import jr.selphius.forum.entry_point.controller.community.{CommunityGetController, CommunityPostController, CommunityPutController}
-import jr.selphius.forum.entry_point.controller.user.{UserDeleteController, UserGetController, UserPostController, UserPutController}
+import jr.selphius.forum.entry_point.controller.community.{
+  CommunityGetController,
+  CommunityPostController,
+  CommunityPutController
+}
+import jr.selphius.forum.entry_point.controller.user.{
+  UserDeleteController,
+  UserGetController,
+  UserPostController,
+  UserPutController
+}
 import jr.selphius.forum.module.community.infrastructure.dependency_injection.CommunityModuleDependencyContainer
 import jr.selphius.forum.module.user.infrastructure.dependency_injection.UserModuleDependencyContainer
 

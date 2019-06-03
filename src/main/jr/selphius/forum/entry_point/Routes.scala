@@ -20,6 +20,16 @@ final class Routes(container: EntryPointDependencyContainer) {
           )
         }
       }
+    } ~
+    put {
+      path("communities") {
+        jsonBody { body =>
+          container.communityPutController.put(
+            body("id").convertTo[String],
+            body("title").convertTo[String]
+          )
+        }
+      }
     }
 
   private val user = get {

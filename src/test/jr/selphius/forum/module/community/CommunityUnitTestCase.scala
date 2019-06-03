@@ -13,8 +13,13 @@ protected[community] trait CommunityUnitTestCase extends UnitTestCase {
       .expects()
       .returning(Future.successful(communities))
 
-  protected def repositoryShouldSaveVideo(community: Community): Unit =
+  protected def repositoryShouldSaveCommunity(community: Community): Unit =
     (repository.save _)
+      .expects(community)
+      .returning(Future.unit)
+
+  protected def repositoryShouldUpdateCommunity(community: Community): Unit =
+    (repository.update _)
       .expects(community)
       .returning(Future.unit)
 }

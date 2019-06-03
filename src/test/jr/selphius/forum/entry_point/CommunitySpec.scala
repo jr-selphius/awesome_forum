@@ -26,6 +26,27 @@ final class CommunitySpec extends AcceptanceSpec {
     status shouldBe StatusCodes.NoContent
   }
 
+  "update a community" in {
+
+    cleanCommunitiesTable()
+
+    val community = CommunityMother.random
+
+    communityContainer.repository.save(community)
+
+    put(
+      "/communities",
+      s"""
+        |{
+        |  "id": "${community.id.value.toString}",
+        |  "title": "The new community"
+        |}
+      """.stripMargin
+    ) {
+      status shouldBe StatusCodes.NoContent
+    }
+  }
+
   "return all the system communities" in {
 
     cleanCommunitiesTable()

@@ -26,7 +26,7 @@ final class UserSpec extends AcceptanceSpec {
     status shouldBe StatusCodes.NoContent
   }
 
-  "update a user" in {
+  "update an user" in {
 
     cleanUsersTable()
 
@@ -41,6 +41,19 @@ final class UserSpec extends AcceptanceSpec {
         |  "name": "The name updated"
         |}
       """.stripMargin) {
+      status shouldBe StatusCodes.NoContent
+    }
+  }
+
+  "delete an user" in {
+
+    cleanUsersTable()
+
+    val user = UserMother.random
+
+    userDependencies.repository.save(user)
+
+    delete("/users/" + user.id.value) {
       status shouldBe StatusCodes.NoContent
     }
   }

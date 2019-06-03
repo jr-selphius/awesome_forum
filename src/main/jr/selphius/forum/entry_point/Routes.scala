@@ -35,6 +35,11 @@ final class Routes(container: EntryPointDependencyContainer) {
   private val user = get {
     path("users")(container.userGetController.get())
   } ~
+    delete {
+      path("users" / Segment) { id: String =>
+        container.userDeleteController.delete(id)
+      }
+    } ~
     post {
       path("users") {
         jsonBody { body =>

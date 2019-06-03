@@ -8,5 +8,6 @@ object CommunityTitleMother {
 
   def apply(value: String): CommunityTitle = CommunityTitle(value)
 
-  def random(): CommunityTitle = CommunityTitle(StringMother.random(numChars = IntMother.randomBetween(minChars, maxChars)))
+  def random(): CommunityTitle =
+    CommunityTitle(StringMother.random(numChars = IntMother.randomBetween(minChars, maxChars)))
 }

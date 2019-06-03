@@ -5,8 +5,8 @@ import jr.selphius.forum.module.shared.IntMother
 object UserMother {
 
   def apply(
-             id: String = UserIdMother.random.value.toString,
-             name: String = UsernameMother.random.value
+      id: String = UserIdMother.random.value.toString,
+      name: String = UsernameMother.random.value
   ): User = User(id, name)
 
   def random: User = apply()

@@ -4,8 +4,8 @@ import jr.selphius.forum.module.shared.IntMother
 
 object CommunityMother {
   def apply(
-             id: String = CommunityIdMother.random.value.toString,
-             title: String = CommunityTitleMother.random.value
+      id: String = CommunityIdMother.random.value.toString,
+      title: String = CommunityTitleMother.random.value
   ): Community = Community(id, title)
 
   def random: Community = apply()

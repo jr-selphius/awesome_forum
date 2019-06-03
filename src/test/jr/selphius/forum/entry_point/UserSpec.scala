@@ -53,7 +53,7 @@ final class UserSpec extends AcceptanceSpec {
 
     userDependencies.repository.save(user)
 
-    delete("/users/" + user.id.value) {
+    delete(s"/users/${user.id.value}") {
       status shouldBe StatusCodes.NoContent
     }
   }

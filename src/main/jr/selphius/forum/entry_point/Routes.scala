@@ -11,6 +11,11 @@ final class Routes(container: EntryPointDependencyContainer) {
   private val community = get {
     path("communities")(container.communityGetController.get())
   } ~
+    delete {
+      path("communities" / Segment) { id: String =>
+        container.communityDeleteController.delete(id)
+      }
+    } ~
     post {
       path("communities") {
         jsonBody { body =>

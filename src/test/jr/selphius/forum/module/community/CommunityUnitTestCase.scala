@@ -1,7 +1,7 @@
 package jr.selphius.forum.module.community
 
 import jr.selphius.forum.module.UnitTestCase
-import jr.selphius.forum.module.community.domain.{Community, CommunityRepository}
+import jr.selphius.forum.module.community.domain.{Community, CommunityId, CommunityRepository}
 
 import scala.concurrent.Future
 
@@ -21,5 +21,10 @@ protected[community] trait CommunityUnitTestCase extends UnitTestCase {
   protected def repositoryShouldUpdateCommunity(community: Community): Unit =
     (repository.update _)
       .expects(community)
+      .returning(Future.unit)
+
+  protected def repositoryShouldRemoveCommunity(id: CommunityId): Unit =
+    (repository.remove _)
+      .expects(id)
       .returning(Future.unit)
 }

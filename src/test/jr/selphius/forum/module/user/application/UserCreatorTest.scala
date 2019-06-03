@@ -10,7 +10,7 @@ final class UserCreatorTest extends UserUnitTestCase {
     "save a user" in {
       val user = UserMother.random
 
-      repositoryShouldUserVideo(user)
+      repositoryShouldSaveUserVideo(user)
 
       userCreator.create(user.id, user.name) should be
     }

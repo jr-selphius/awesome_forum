@@ -13,8 +13,13 @@ protected[user] trait UserUnitTestCase extends UnitTestCase {
       .expects()
       .returning(Future.successful(users))
 
-  protected def repositoryShouldUserVideo(user: User): Unit =
+  protected def repositoryShouldSaveUserVideo(user: User): Unit =
     (repository.save _)
+      .expects(user)
+      .returning(Future.unit)
+
+  protected def repositoryShouldUpdateUserVideo(user: User): Unit =
+    (repository.update _)
       .expects(user)
       .returning(Future.unit)
 }

@@ -39,6 +39,8 @@ protected[entry_point] abstract class AcceptanceSpec
 
   def get[T](path: String)(body: ⇒ T): T = Get(path) ~> routes.all ~> check(body)
 
+  def delete[T](path: String)(body: ⇒ T): T = Delete(path) ~> routes.all ~> check(body)
+
   def post[T](path: String, request: String)(body: ⇒ T): T =
     HttpRequest(
       method = HttpMethods.POST,

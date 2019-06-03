@@ -10,7 +10,7 @@ final class UserUpdaterTest extends UserUnitTestCase {
     "update a user" in {
       val user = UserMother.random
 
-      repositoryShouldUpdateUserVideo(user)
+      repositoryShouldUpdateUser(user)
 
       userUpdater.update(user.id, user.name) should be
     }

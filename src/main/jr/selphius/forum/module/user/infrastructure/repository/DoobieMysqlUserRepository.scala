@@ -2,7 +2,7 @@ package jr.selphius.forum.module.user.infrastructure.repository
 
 import doobie.implicits._
 import jr.selphius.forum.module.shared.infraestructure.persistence.doobie.DoobieDbConnection
-import jr.selphius.forum.module.user.domain.{User, UserRepository}
+import jr.selphius.forum.module.user.domain.{User, UserId, UserRepository}
 import jr.selphius.forum.module.shared.infraestructure.persistence.doobie.TypesConversions._
 
 import scala.concurrent.{ExecutionContext, Future}
@@ -21,6 +21,13 @@ final class DoobieMysqlUserRepository(db: DoobieDbConnection)(implicit execution
 
   override def update(user: User): Future[Unit] = {
     sql"UPDATE users SET name=${user.name} WHERE user_id=${user.id}".update.run
+      .transact(db.transactor)
+      .unsafeToFuture()
+      .map(_ => ())
+  }
+
+  override def remove(id: UserId): Future[Unit] = {
+    sql"DELETE FROM users WHERE user_id=$id".update.run
       .transact(db.transactor)
       .unsafeToFuture()
       .map(_ => ())

@@ -26,6 +26,25 @@ final class UserSpec extends AcceptanceSpec {
     status shouldBe StatusCodes.NoContent
   }
 
+  "update a user" in {
+
+    cleanUsersTable()
+
+    val user = UserMother.random
+
+    userDependencies.repository.save(user)
+
+    put("/users",
+        s"""
+        |{
+        |  "id": "${user.id.value.toString}",
+        |  "name": "The name updated"
+        |}
+      """.stripMargin) {
+      status shouldBe StatusCodes.NoContent
+    }
+  }
+
   "return all the system users" in {
 
     cleanUsersTable()

@@ -50,4 +50,16 @@ protected[entry_point] abstract class AcceptanceSpec
     ) ~> routes.all ~> check(
       body
     )
+
+  def put[T](path: String, request: String)(body: ⇒ T): T =
+    HttpRequest(
+      method = HttpMethods.PUT,
+      uri = path,
+      entity = HttpEntity(
+        MediaTypes.`application/json`,
+        ByteString(request)
+      )
+    ) ~> routes.all ~> check(
+      body
+    )
 }

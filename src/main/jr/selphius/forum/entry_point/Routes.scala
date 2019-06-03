@@ -34,6 +34,16 @@ final class Routes(container: EntryPointDependencyContainer) {
           )
         }
       }
+    } ~
+    put {
+      path("users") {
+        jsonBody { body =>
+          container.userPutController.put(
+            body("id").convertTo[String],
+            body("name").convertTo[String]
+          )
+        }
+      }
     }
 
   val all: Route = user ~ community

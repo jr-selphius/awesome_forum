@@ -7,7 +7,7 @@ object UserMother {
   def apply(
       id: String = UserIdMother.random.value.toString,
       name: String = UsernameMother.random.value,
-      email: String= EmailMother.random.value
+      email: String = EmailMother.random.value
   ): User = User(id, name, email)
 
   def random: User = apply()

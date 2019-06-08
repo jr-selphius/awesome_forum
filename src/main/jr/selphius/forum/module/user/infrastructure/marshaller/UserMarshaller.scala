@@ -13,7 +13,7 @@ object UserMarshaller {
 
     def read(value: JsValue): Email = value match {
       case JsString(email) => Email(email)
-      case _              => throw DeserializationException("Expected 1 string for Email")
+      case _               => throw DeserializationException("Expected 1 string for Email")
     }
   }
 

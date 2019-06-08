@@ -5,8 +5,9 @@ import jr.selphius.forum.module.user.domain.UserMother
 import jr.selphius.forum.module.user.infrastructure.marshaller.UserMarshallerTest
 import spray.json._
 import doobie.implicits._
+import org.scalatest.BeforeAndAfterEach
 
-final class UserSpec extends AcceptanceSpec {
+final class UserSpec extends AcceptanceSpec with BeforeAndAfterEach {
 
   private def cleanUsersTable() =
     sql"TRUNCATE TABLE users".update.run
@@ -14,12 +15,18 @@ final class UserSpec extends AcceptanceSpec {
       .unsafeToFuture()
       .futureValue
 
+  override protected def beforeEach(): Unit = {
+    super.beforeEach()
+    cleanUsersTable()
+  }
+
   "save a user" in post(
     "/users",
     """
       |{
       |  "id": "a11098af-d352-4cce-8372-2b48b97e7042",
-      |  "name": "The new user"
+      |  "username": "The new user",
+      |  "email": "email@example.com"
       |}
     """.stripMargin
   ) {
@@ -27,8 +34,6 @@ final class UserSpec extends AcceptanceSpec {
   }
 
   "update an user" in {
-
-    cleanUsersTable()
 
     val user = UserMother.random
 
@@ -38,7 +43,8 @@ final class UserSpec extends AcceptanceSpec {
         s"""
         |{
         |  "id": "${user.id.value.toString}",
-        |  "name": "The name updated"
+        |  "username": "The name updated",
+        |  "email": "anotheremail@example2.com"
         |}
       """.stripMargin) {
       status shouldBe StatusCodes.NoContent
@@ -46,8 +52,6 @@ final class UserSpec extends AcceptanceSpec {
   }
 
   "delete an user" in {
-
-    cleanUsersTable()
 
     val user = UserMother.random
 
@@ -59,8 +63,6 @@ final class UserSpec extends AcceptanceSpec {
   }
 
   "return all the system users" in {
-
-    cleanUsersTable()
 
     val users = UserMother.randomSeq
 

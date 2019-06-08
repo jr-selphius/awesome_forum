@@ -5,14 +5,20 @@ import jr.selphius.forum.module.community.domain.{Community, CommunityMother}
 import jr.selphius.forum.module.community.infrastructure.marshaller.CommunityMarshallerTest
 import spray.json._
 import doobie.implicits._
+import org.scalatest.BeforeAndAfterEach
 
-final class CommunitySpec extends AcceptanceSpec {
+final class CommunitySpec extends AcceptanceSpec with BeforeAndAfterEach {
 
   private def cleanCommunitiesTable() =
     sql"TRUNCATE TABLE communities".update.run
       .transact(doobieDbConnection.transactor)
       .unsafeToFuture()
       .futureValue
+
+  override protected def beforeEach(): Unit = {
+    super.beforeEach()
+    cleanCommunitiesTable()
+  }
 
   "save a community" in post(
     "/communities",
@@ -27,8 +33,6 @@ final class CommunitySpec extends AcceptanceSpec {
   }
 
   "update a community" in {
-
-    cleanCommunitiesTable()
 
     val community = CommunityMother.random
 
@@ -49,8 +53,6 @@ final class CommunitySpec extends AcceptanceSpec {
 
   "delete a community" in {
 
-    cleanCommunitiesTable()
-
     val community = CommunityMother.random
 
     communityContainer.repository.save(community)
@@ -61,8 +63,6 @@ final class CommunitySpec extends AcceptanceSpec {
   }
 
   "return all the system communities" in {
-
-    cleanCommunitiesTable()
 
     val communities = CommunityMother.randomSeq
 

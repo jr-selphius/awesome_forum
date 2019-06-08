@@ -1,28 +1,23 @@
 package jr.selphius.forum.module.user.infrastructure.repository
 
-import cats.implicits._
 import doobie.implicits._
-import org.scalatest.concurrent.ScalaFutures._
-import doobie.util.update.Update
 import jr.selphius.forum.module.user.UserIntegrationTestCase
-import jr.selphius.forum.module.user.domain.{User, UserMother}
-import jr.selphius.forum.module.shared.infraestructure.persistence.doobie.TypesConversions._
+import jr.selphius.forum.module.user.domain.UserMother
+import org.scalatest.BeforeAndAfterEach
+import org.scalatest.concurrent.ScalaFutures._
 
-final class DoobieMySqlUserRepositoryTest extends UserIntegrationTestCase {
+final class DoobieMySqlUserRepositoryTest extends UserIntegrationTestCase with BeforeAndAfterEach {
 
-  def insert(users: Seq[User]) = {
-    Update[User]("INSERT INTO users(user_id, name) VALUES (?, ?)")
-      .updateMany(users.toVector)
-      .transact(doobieDbConnection.transactor)
-      .unsafeToFuture()
-      .value
-  }
-
-  def cleanUsersTable() = {
+  private def cleanUsersTable() = {
     sql"TRUNCATE TABLE users".update.run
       .transact(doobieDbConnection.transactor)
       .unsafeToFuture()
       .futureValue
+  }
+
+  override protected def beforeEach(): Unit = {
+    super.beforeEach()
+    cleanUsersTable()
   }
 
   "Doobie MySql User Repository" should {
@@ -35,13 +30,11 @@ final class DoobieMySqlUserRepositoryTest extends UserIntegrationTestCase {
     "search all users" in {
       val expectedUsers = UserMother.randomSeq
 
-      insert(expectedUsers)
+      expectedUsers.foreach(user => repository.save(user))
 
       whenReady(repository.getAll()) {
         _ shouldBe expectedUsers
       }
-
-      cleanUsersTable()
     }
   }
 }

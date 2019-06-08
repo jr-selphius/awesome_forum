@@ -12,7 +12,7 @@ final class UserCreatorTest extends UserUnitTestCase {
 
       repositoryShouldSaveUser(user)
 
-      userCreator.create(user.id, user.name) should be
+      userCreator.create(user.id, user.username, user.email) should be
     }
   }
 }

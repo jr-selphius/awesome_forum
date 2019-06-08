@@ -7,8 +7,9 @@ import org.scalatest.concurrent.ScalaFutures._
 import jr.selphius.forum.module.community.CommunityIntegrationTestCase
 import jr.selphius.forum.module.community.domain.{Community, CommunityMother}
 import jr.selphius.forum.module.shared.infraestructure.persistence.doobie.TypesConversions._
+import org.scalatest.BeforeAndAfterEach
 
-final class DoobieMySqlCommunityRepositoryTest extends CommunityIntegrationTestCase {
+final class DoobieMySqlCommunityRepositoryTest extends CommunityIntegrationTestCase with BeforeAndAfterEach {
 
   def insert(communities: Seq[Community]) = {
     Update[Community]("INSERT INTO communities(community_id, title) VALUES (?, ?)")
@@ -23,6 +24,11 @@ final class DoobieMySqlCommunityRepositoryTest extends CommunityIntegrationTestC
       .transact(doobieDbConnection.transactor)
       .unsafeToFuture()
       .futureValue
+  }
+
+  override protected def beforeEach(): Unit = {
+    super.beforeEach()
+    cleanCommunitiesTable()
   }
 
   "Doobie MySql Community Repository" should {

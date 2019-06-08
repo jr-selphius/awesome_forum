@@ -9,9 +9,9 @@ object UserMarshallerTest {
       .map(
         user =>
           JsObject(
-            "id"   -> JsString(user.id.value.toString),
+            "id"       -> JsString(user.id.value.toString),
             "username" -> JsString(user.username.value.toString),
-            "email" -> JsString(user.email.value.toString)
+            "email"    -> JsString(user.email.value.toString)
         ))
       .toVector
   )

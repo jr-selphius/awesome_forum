@@ -39,14 +39,16 @@ final class UserSpec extends AcceptanceSpec with BeforeAndAfterEach {
 
     userDependencies.repository.save(user)
 
-    put("/users",
-        s"""
+    put(
+      "/users",
+      s"""
         |{
         |  "id": "${user.id.value.toString}",
         |  "username": "The name updated",
         |  "email": "anotheremail@example2.com"
         |}
-      """.stripMargin) {
+      """.stripMargin
+    ) {
       status shouldBe StatusCodes.NoContent
     }
   }

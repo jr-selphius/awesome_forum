@@ -50,7 +50,8 @@ final class Routes(container: EntryPointDependencyContainer) {
         jsonBody { body =>
           container.userPostController.post(
             body("id").convertTo[String],
-            body("name").convertTo[String]
+            body("username").convertTo[String],
+            body("email").convertTo[String],
           )
         }
       }
@@ -60,7 +61,8 @@ final class Routes(container: EntryPointDependencyContainer) {
         jsonBody { body =>
           container.userPutController.put(
             body("id").convertTo[String],
-            body("name").convertTo[String]
+            body("username").convertTo[String],
+            body("email").convertTo[String],
           )
         }
       }

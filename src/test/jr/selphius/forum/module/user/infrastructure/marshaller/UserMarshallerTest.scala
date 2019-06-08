@@ -10,7 +10,8 @@ object UserMarshallerTest {
         user =>
           JsObject(
             "id"   -> JsString(user.id.value.toString),
-            "name" -> JsString(user.name.value.toString)
+            "username" -> JsString(user.username.value.toString),
+            "email" -> JsString(user.email.value.toString)
         ))
       .toVector
   )

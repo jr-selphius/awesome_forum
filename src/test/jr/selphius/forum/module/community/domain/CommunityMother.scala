@@ -10,5 +10,5 @@ object CommunityMother {
 
   def random: Community = apply()
 
-  def randomSeq: Seq[Community] = (0 to IntMother.randomBetween(0, 10)).map(_ => random)
+  def randomSeq: Seq[Community] = (0 to IntMother.randomBetween(1, 3)).map(_ => random)
 }

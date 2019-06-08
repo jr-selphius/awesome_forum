@@ -12,7 +12,7 @@ final class UserUpdaterTest extends UserUnitTestCase {
 
       repositoryShouldUpdateUser(user)
 
-      userUpdater.update(user.id, user.name) should be
+      userUpdater.update(user.id, user.username, user.email) should be
     }
   }
 }

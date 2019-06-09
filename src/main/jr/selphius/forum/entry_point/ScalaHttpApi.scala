@@ -7,6 +7,7 @@ import com.typesafe.config.ConfigFactory
 import jr.selphius.forum.module.community.infrastructure.dependency_injection.CommunityModuleDependencyContainer
 import jr.selphius.forum.module.shared.infraestructure.config
 import jr.selphius.forum.module.shared.infraestructure.dependency_injection.SharedModuleDependencyContainer
+import jr.selphius.forum.module.thread.infrastructure.dependency_injection.ThreadModuleDependencyContainer
 import jr.selphius.forum.module.user.infrastructure.dependency_injection.UserModuleDependencyContainer
 
 import scala.concurrent.ExecutionContext
@@ -34,7 +35,9 @@ object ScalaHttpApi {
 
     val container = new EntryPointDependencyContainer(
       new UserModuleDependencyContainer(sharedDependencies.doobieDbConnection),
-      new CommunityModuleDependencyContainer(sharedDependencies.doobieDbConnection))
+      new CommunityModuleDependencyContainer(sharedDependencies.doobieDbConnection),
+      new ThreadModuleDependencyContainer(sharedDependencies.doobieDbConnection)
+    )
 
     val routes = new Routes(container)
 

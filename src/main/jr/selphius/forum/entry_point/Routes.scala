@@ -68,7 +68,39 @@ final class Routes(container: EntryPointDependencyContainer) {
       }
     }
 
-  val all: Route = user ~ community
+  private val thread = get {
+    path("threads")(container.threadGetController.get())
+  } ~
+    delete {
+      path("threads" / Segment) { id: String =>
+        container.threadDeleteController.delete(id)
+      }
+    } ~
+    post {
+      path("threads") {
+        jsonBody { body =>
+          container.threadPostController.post(
+            body("subject").convertTo[String],
+            body("user_id").convertTo[String],
+            body("community_id").convertTo[String]
+          )
+        }
+      }
+    } ~
+    put {
+      path("threads") {
+        jsonBody { body =>
+          container.threadPutController.put(
+            body("thread_id").convertTo[String],
+            body("subject").convertTo[String],
+            body("user_id").convertTo[String],
+            body("community_id").convertTo[String]
+          )
+        }
+      }
+    }
+
+  val all: Route = user ~ community ~ thread
 
   private def jsonBody[T](handler: Map[String, JsValue] => Route): Route =
     entity(as[JsValue])(json => handler(json.asJsObject.fields))

@@ -1,11 +1,11 @@
 package jr.selphius.forum.entry_point
 
 import akka.http.scaladsl.model.{ContentTypes, StatusCodes}
-import jr.selphius.forum.module.community.domain.{Community, CommunityMother}
-import jr.selphius.forum.module.community.infrastructure.marshaller.CommunityMarshallerTest
-import spray.json._
 import doobie.implicits._
+import jr.selphius.forum.module.community.domain.CommunityMother
+import jr.selphius.forum.module.community.infrastructure.marshaller.CommunityMarshallerTest
 import org.scalatest.BeforeAndAfterEach
+import spray.json._
 
 final class CommunitySpec extends AcceptanceSpec with BeforeAndAfterEach {
 

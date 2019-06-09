@@ -8,6 +8,7 @@ import jr.selphius.forum.module.community.infrastructure.dependency_injection.Co
 import jr.selphius.forum.module.shared.infraestructure.config.DbConfig
 import jr.selphius.forum.module.shared.infraestructure.dependency_injection.SharedModuleDependencyContainer
 import jr.selphius.forum.module.shared.infraestructure.persistence.doobie.DoobieDbConnection
+import jr.selphius.forum.module.thread.infrastructure.dependency_injection.ThreadModuleDependencyContainer
 import jr.selphius.forum.module.user.infrastructure.dependency_injection.UserModuleDependencyContainer
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.{Matchers, WordSpec}
@@ -29,11 +30,14 @@ protected[entry_point] abstract class AcceptanceSpec
     new UserModuleDependencyContainer(sharedDependencies.doobieDbConnection)(sharedDependencies.executionContext)
   protected val communityContainer =
     new CommunityModuleDependencyContainer(sharedDependencies.doobieDbConnection)(sharedDependencies.executionContext)
+  protected val threadContainer =
+    new ThreadModuleDependencyContainer(sharedDependencies.doobieDbConnection)(sharedDependencies.executionContext)
 
   private val routes = new Routes(
     new EntryPointDependencyContainer(
       userDependencies,
-      communityContainer
+      communityContainer,
+      threadContainer
     )
   )
 

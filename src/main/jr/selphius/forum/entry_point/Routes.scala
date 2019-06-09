@@ -81,7 +81,7 @@ final class Routes(container: EntryPointDependencyContainer) {
         jsonBody { body =>
           container.threadPostController.post(
             body("subject").convertTo[String],
-            body("user_id").convertTo[String],
+            body("creator_id").convertTo[String],
             body("community_id").convertTo[String]
           )
         }
@@ -91,9 +91,9 @@ final class Routes(container: EntryPointDependencyContainer) {
       path("threads") {
         jsonBody { body =>
           container.threadPutController.put(
-            body("thread_id").convertTo[String],
+            body("id").convertTo[String],
             body("subject").convertTo[String],
-            body("user_id").convertTo[String],
+            body("creator_id").convertTo[String],
             body("community_id").convertTo[String]
           )
         }

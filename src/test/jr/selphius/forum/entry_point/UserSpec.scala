@@ -37,7 +37,7 @@ final class UserSpec extends AcceptanceSpec with BeforeAndAfterEach {
 
     val user = UserMother.random
 
-    userDependencies.repository.save(user)
+    userContainer.repository.save(user)
 
     put(
       "/users",
@@ -57,7 +57,7 @@ final class UserSpec extends AcceptanceSpec with BeforeAndAfterEach {
 
     val user = UserMother.random
 
-    userDependencies.repository.save(user)
+    userContainer.repository.save(user)
 
     delete(s"/users/${user.id.value}") {
       status shouldBe StatusCodes.NoContent
@@ -68,7 +68,7 @@ final class UserSpec extends AcceptanceSpec with BeforeAndAfterEach {
 
     val users = UserMother.randomSeq
 
-    users.foreach(user => userDependencies.repository.save(user))
+    users.foreach(user => userContainer.repository.save(user))
 
     get("/users") {
       status shouldBe StatusCodes.OK

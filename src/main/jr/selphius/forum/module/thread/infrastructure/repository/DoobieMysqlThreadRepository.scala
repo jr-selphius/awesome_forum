@@ -22,7 +22,7 @@ final class DoobieMysqlThreadRepository(db: DoobieDbConnection)(implicit executi
   }
 
   override def update(thread: Thread): Future[Unit] = {
-    sql"UPDATE threads SET subject=${thread.subject}, community_id=${thread.communityId}, WHERE thread_id=${thread.id}".update.run
+    sql"UPDATE threads SET subject=${thread.subject}, community_id=${thread.communityId} WHERE thread_id=${thread.id}".update.run
       .transact(db.transactor)
       .unsafeToFuture()
       .map(_ => ())

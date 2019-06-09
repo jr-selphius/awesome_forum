@@ -13,7 +13,7 @@ object CommunityMarshaller extends SprayJsonSupport with DefaultJsonProtocol {
 
     override def read(value: JsValue): CommunityTitle = value match {
       case JsString(title) => CommunityTitle(title)
-      case _               => throw DeserializationException("Expected 1 string for Usertitle")
+      case _               => throw DeserializationException("Expected 1 string for Community title")
     }
   }
 
@@ -31,7 +31,7 @@ object CommunityMarshaller extends SprayJsonSupport with DefaultJsonProtocol {
 
     override def read(value: JsValue): CommunityId = value match {
       case JsString(id) => CommunityId(id)
-      case _            => throw DeserializationException("Expected 1 string for UserId")
+      case _            => throw DeserializationException("Expected 1 string for CommunityId")
     }
   }
 

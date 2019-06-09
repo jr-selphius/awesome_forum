@@ -26,7 +26,7 @@ protected[entry_point] abstract class AcceptanceSpec
   private val sharedDependencies = new SharedModuleDependencyContainer(actorSystemName, dbConfig)
 
   protected val doobieDbConnection: DoobieDbConnection = sharedDependencies.doobieDbConnection
-  protected val userDependencies =
+  protected val userContainer =
     new UserModuleDependencyContainer(sharedDependencies.doobieDbConnection)(sharedDependencies.executionContext)
   protected val communityContainer =
     new CommunityModuleDependencyContainer(sharedDependencies.doobieDbConnection)(sharedDependencies.executionContext)
@@ -35,7 +35,7 @@ protected[entry_point] abstract class AcceptanceSpec
 
   private val routes = new Routes(
     new EntryPointDependencyContainer(
-      userDependencies,
+      userContainer,
       communityContainer,
       threadContainer
     )
